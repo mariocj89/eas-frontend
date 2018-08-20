@@ -10,6 +10,7 @@ import PublishedFacebookLoginRafflePageContainer from '../../Pages/FacebookLogin
 import FacebookPhotoRafflePageContainer from '../../Pages/FacebookPhotoRaffle/FacebookPhotoRafflePageContainer';
 import PublishedFacebookPhotoRafflePageContainer from '../../Pages/FacebookPhotoRaffle/PublishedFacebookPhotoRafflePageContainer';
 import LetterDrawPageContainer from '../../Pages/LetterDrawPage/LetterDrawPageContainer';
+import RollDicePageContainer from '../../Pages/RollDicePage/RollDicePageContainer';
 
 import STYLES from './DrawPage.scss';
 
@@ -20,6 +21,8 @@ const DrawPage = () => (
     <Route exact path="/facebook_photo" component={FacebookPhotoRafflePageContainer} />
     <Route exact path="/facebook_login" component={FacebookLoginRafflePageContainer} />
     <Route exact path="/letter" component={LetterDrawPageContainer} />
+    <Route exact path="/dice" component={RollDicePageContainer} />
+
     <Route path="/raffle/:drawId" component={PublishedRafflePageContainer} />
     <Route path="/number/:drawId" component={PublishedRandomNumberPageContainer} />
     <Route path="/facebook_login/:drawId" component={PublishedFacebookLoginRafflePageContainer} />

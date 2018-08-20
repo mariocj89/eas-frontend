@@ -130,5 +130,11 @@
   "WizardForm": {
     "next": "Siguiente",
     "back": "Atrás"
+  },
+  "RollDicePage": {
+    "roll_dice_html_title": "Lanzar dados online",
+    "roll_dice_tittle": "Lanzar dados",
+    "number_of_dice": "Número de dados",
+    "roll_dice": "Lanzar dados"
   }
 }
