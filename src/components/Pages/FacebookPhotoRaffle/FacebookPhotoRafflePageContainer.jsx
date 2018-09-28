@@ -77,18 +77,16 @@ class FacebookPhotoRafflePageContainer extends Component {
     const { values, participantsFetched } = this.state;
     const { isLoggedInFB, userPages } = this.props.facebookContext;
     return (
-      <div>
-        <FacebookPhotoRafflePage
-          isLoggedInFB={isLoggedInFB}
-          participantsFetched={participantsFetched}
-          userPages={userPages}
-          values={values}
-          onGetLikes={this.onGetLikes}
-          onFieldChange={this.onFieldChange}
-          handlePublish={this.handlePublish}
-          handleFaceebookLogout={this.handleFaceebookLogout}
-        />
-      </div>
+      <FacebookPhotoRafflePage
+        isLoggedInFB={isLoggedInFB}
+        participantsFetched={participantsFetched}
+        userPages={userPages}
+        values={values}
+        onGetLikes={this.onGetLikes}
+        onFieldChange={this.onFieldChange}
+        handlePublish={this.handlePublish}
+        handleFaceebookLogout={this.handleFaceebookLogout}
+      />
     );
   }
 }

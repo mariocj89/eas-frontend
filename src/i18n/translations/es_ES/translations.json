@@ -27,7 +27,10 @@
   "FacebookPhotoRafflePage": {
     "page_title": "Sorteo de 'likes' en Facebook",
     "html_title": "Sorteo de likes en Facebook",
-    "draw_subheading": "Some description"
+    "draw_subheading": "Some description",
+
+    "step_login_with_facebook": "Acceder con Facebook",
+    "step_choose_post": "Elegir publicación"
   },
   "DateTimePicker": {
     "cancel": "Cancelar",
