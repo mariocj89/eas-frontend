@@ -1,5 +1,345 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MultiValueInput Should not mutate the original value when values are removed 1`] = `
+<MultiValueInput
+  data-component="MultiValueInput__field"
+  delimiters={
+    Array [
+      "Enter",
+      ",",
+    ]
+  }
+  inputProps={
+    Object {
+      "data-component": "MultiValueInput__field-input",
+    }
+  }
+  label="Input label"
+  labelDisplayList="Selected Items"
+  messageEmpty="No items selected"
+  name="field1"
+  onChange={[Function]}
+  value={
+    Array [
+      "Value 1",
+    ]
+  }
+>
+  <div
+    data-component="MultiValueInput__field"
+  >
+    <TextField
+      inputProps={
+        Object {
+          "data-component": "MultiValueInput__field-input",
+        }
+      }
+      label="Input label"
+      margin="normal"
+      name="field1"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="text"
+      value=""
+    >
+      <WithStyles(FormControl)
+        margin="normal"
+        required={false}
+      >
+        <FormControl
+          classes={
+            Object {
+              "fullWidth": "MuiFormControl-fullWidth-4",
+              "marginDense": "MuiFormControl-marginDense-3",
+              "marginNormal": "MuiFormControl-marginNormal-2",
+              "root": "MuiFormControl-root-1",
+            }
+          }
+          component="div"
+          disabled={false}
+          error={false}
+          fullWidth={false}
+          margin="normal"
+          required={false}
+        >
+          <div
+            className="MuiFormControl-root-1 MuiFormControl-marginNormal-2"
+          >
+            <WithStyles(InputLabel)>
+              <InputLabel
+                classes={
+                  Object {
+                    "animated": "MuiInputLabel-animated-9",
+                    "formControl": "MuiInputLabel-formControl-6",
+                    "marginDense": "MuiInputLabel-marginDense-7",
+                    "root": "MuiInputLabel-root-5",
+                    "shrink": "MuiInputLabel-shrink-8",
+                  }
+                }
+                disableAnimation={false}
+              >
+                <WithStyles(FormLabel)
+                  className="MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9"
+                  data-shrink={false}
+                >
+                  <FormLabel
+                    className="MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9"
+                    classes={
+                      Object {
+                        "asterisk": "MuiFormLabel-asterisk-14",
+                        "disabled": "MuiFormLabel-disabled-12",
+                        "error": "MuiFormLabel-error-13",
+                        "focused": "MuiFormLabel-focused-11",
+                        "root": "MuiFormLabel-root-10",
+                      }
+                    }
+                    component="label"
+                    data-shrink={false}
+                  >
+                    <label
+                      className="MuiFormLabel-root-10 MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9"
+                      data-shrink={false}
+                    >
+                      Input label
+                    </label>
+                  </FormLabel>
+                </WithStyles(FormLabel)>
+              </InputLabel>
+            </WithStyles(InputLabel)>
+            <WithStyles(Input)
+              inputProps={
+                Object {
+                  "data-component": "MultiValueInput__field-input",
+                }
+              }
+              name="field1"
+              onChange={[Function]}
+              type="text"
+              value=""
+            >
+              <Input
+                classes={
+                  Object {
+                    "disabled": "MuiInput-disabled-18",
+                    "error": "MuiInput-error-20",
+                    "focused": "MuiInput-focused-17",
+                    "formControl": "MuiInput-formControl-16",
+                    "fullWidth": "MuiInput-fullWidth-22",
+                    "input": "MuiInput-input-23",
+                    "inputMarginDense": "MuiInput-inputMarginDense-24",
+                    "inputMultiline": "MuiInput-inputMultiline-25",
+                    "inputType": "MuiInput-inputType-26",
+                    "inputTypeSearch": "MuiInput-inputTypeSearch-27",
+                    "multiline": "MuiInput-multiline-21",
+                    "root": "MuiInput-root-15",
+                    "underline": "MuiInput-underline-19",
+                  }
+                }
+                disableUnderline={false}
+                fullWidth={false}
+                inputProps={
+                  Object {
+                    "data-component": "MultiValueInput__field-input",
+                  }
+                }
+                multiline={false}
+                name="field1"
+                onChange={[Function]}
+                type="text"
+                value=""
+              >
+                <div
+                  className="MuiInput-root-15 MuiInput-formControl-16 MuiInput-underline-19"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="MuiInput-input-23"
+                    data-component="MultiValueInput__field-input"
+                    disabled={false}
+                    name="field1"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </Input>
+            </WithStyles(Input)>
+          </div>
+        </FormControl>
+      </WithStyles(FormControl)>
+    </TextField>
+    <MultiValueDisplay
+      allowDelete={true}
+      label="Selected Items"
+      messageEmpty="No items selected"
+      onDelete={[Function]}
+      values={
+        Array [
+          "Value 1",
+        ]
+      }
+    >
+      <div
+        className="MultiValueDisplay"
+        data-component="MultiValueDisplay"
+      >
+        <WithStyles(Typography)
+          variant="caption"
+        >
+          <Typography
+            align="inherit"
+            classes={
+              Object {
+                "alignCenter": "MuiTypography-alignCenter-41",
+                "alignJustify": "MuiTypography-alignJustify-43",
+                "alignLeft": "MuiTypography-alignLeft-40",
+                "alignRight": "MuiTypography-alignRight-42",
+                "body1": "MuiTypography-body1-37",
+                "body2": "MuiTypography-body2-36",
+                "button": "MuiTypography-button-39",
+                "caption": "MuiTypography-caption-38",
+                "colorError": "MuiTypography-colorError-51",
+                "colorInherit": "MuiTypography-colorInherit-47",
+                "colorPrimary": "MuiTypography-colorPrimary-48",
+                "colorSecondary": "MuiTypography-colorSecondary-49",
+                "colorTextSecondary": "MuiTypography-colorTextSecondary-50",
+                "display1": "MuiTypography-display1-32",
+                "display2": "MuiTypography-display2-31",
+                "display3": "MuiTypography-display3-30",
+                "display4": "MuiTypography-display4-29",
+                "gutterBottom": "MuiTypography-gutterBottom-45",
+                "headline": "MuiTypography-headline-33",
+                "noWrap": "MuiTypography-noWrap-44",
+                "paragraph": "MuiTypography-paragraph-46",
+                "root": "MuiTypography-root-28",
+                "subheading": "MuiTypography-subheading-35",
+                "title": "MuiTypography-title-34",
+              }
+            }
+            color="default"
+            gutterBottom={false}
+            headlineMapping={
+              Object {
+                "body1": "p",
+                "body2": "aside",
+                "display1": "h1",
+                "display2": "h1",
+                "display3": "h1",
+                "display4": "h1",
+                "headline": "h1",
+                "subheading": "h3",
+                "title": "h2",
+              }
+            }
+            noWrap={false}
+            paragraph={false}
+            variant="caption"
+          >
+            <span
+              className="MuiTypography-root-28 MuiTypography-caption-38"
+            >
+              Selected Items
+            </span>
+          </Typography>
+        </WithStyles(Typography)>
+        <div
+          className="MultiValueDisplay__values-list"
+        >
+          <WithStyles(Chip)
+            data-component="MultiValueDisplay__chip"
+            key="1"
+            label="Value 1"
+            onDelete={[Function]}
+          >
+            <Chip
+              classes={
+                Object {
+                  "avatar": "MuiChip-avatar-55",
+                  "avatarChildren": "MuiChip-avatarChildren-56",
+                  "clickable": "MuiChip-clickable-53",
+                  "deletable": "MuiChip-deletable-54",
+                  "deleteIcon": "MuiChip-deleteIcon-58",
+                  "label": "MuiChip-label-57",
+                  "root": "MuiChip-root-52",
+                }
+              }
+              clickable={false}
+              component="div"
+              data-component="MultiValueDisplay__chip"
+              label="Value 1"
+              onDelete={[Function]}
+            >
+              <div
+                className="MuiChip-root-52 MuiChip-deletable-54"
+                data-component="MultiValueDisplay__chip"
+                onKeyDown={[Function]}
+                role="button"
+                tabIndex={0}
+              >
+                <span
+                  className="MuiChip-label-57"
+                >
+                  Value 1
+                </span>
+                <pure(Cancel)
+                  className="MuiChip-deleteIcon-58"
+                  onClick={[Function]}
+                >
+                  <Cancel
+                    className="MuiChip-deleteIcon-58"
+                    onClick={[Function]}
+                  >
+                    <WithStyles(SvgIcon)
+                      className="MuiChip-deleteIcon-58"
+                      onClick={[Function]}
+                    >
+                      <SvgIcon
+                        className="MuiChip-deleteIcon-58"
+                        classes={
+                          Object {
+                            "colorAction": "MuiSvgIcon-colorAction-62",
+                            "colorDisabled": "MuiSvgIcon-colorDisabled-64",
+                            "colorError": "MuiSvgIcon-colorError-63",
+                            "colorPrimary": "MuiSvgIcon-colorPrimary-60",
+                            "colorSecondary": "MuiSvgIcon-colorSecondary-61",
+                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-65",
+                            "root": "MuiSvgIcon-root-59",
+                          }
+                        }
+                        color="inherit"
+                        component="svg"
+                        fontSize="default"
+                        onClick={[Function]}
+                        viewBox="0 0 24 24"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="MuiSvgIcon-root-59 MuiChip-deleteIcon-58"
+                          focusable="false"
+                          onClick={[Function]}
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                          />
+                        </svg>
+                      </SvgIcon>
+                    </WithStyles(SvgIcon)>
+                  </Cancel>
+                </pure(Cancel)>
+              </div>
+            </Chip>
+          </WithStyles(Chip)>
+        </div>
+      </div>
+    </MultiValueDisplay>
+  </div>
+</MultiValueInput>
+`;
+
 exports[`MultiValueInput Should render correctly with values 1`] = `
 <div
   data-component=""
