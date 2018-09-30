@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withFeedbackValidation Should not render the inner component when doesn't have errors 1`] = `""`;
+
+exports[`withFeedbackValidation Should render the inner component correctly when has errors 1`] = `
+<Component
+  error="There is an error"
+/>
+`;

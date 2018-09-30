@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`withFormValidation Errors Global errors Are not shown if there are not errors 1`] = `
+exports[`withFormValidation Form errors Are not shown if there are not errors 1`] = `
 <WithFormValidation
   checkErrors={[Function]}
   onFieldDeregister={null}
@@ -25,13 +25,13 @@ exports[`withFormValidation Errors Global errors Are not shown if there are not 
           error={false}
           id="field"
           name="field1"
-          onChange={[Function]}
+          onChange={null}
           value="1"
         >
           <input
             id="field"
             name="field1"
-            onChange={[Function]}
+            onChange={null}
             type="text"
             value="1"
           />
@@ -47,7 +47,7 @@ exports[`withFormValidation Errors Global errors Are not shown if there are not 
 </WithFormValidation>
 `;
 
-exports[`withFormValidation Errors Global errors Are not shown until a field is changed 1`] = `
+exports[`withFormValidation Form errors Are not shown until a field is changed 1`] = `
 <WithFormValidation
   checkErrors={[Function]}
   onFieldDeregister={null}
@@ -72,18 +72,64 @@ exports[`withFormValidation Errors Global errors Are not shown until a field is 
           error={false}
           id="field"
           name="field1"
-          onChange={[Function]}
+          onChange={null}
           value="1"
         >
           <input
             id="field"
             name="field1"
-            onChange={[Function]}
+            onChange={null}
             type="text"
             value="1"
           />
         </Field>
       </WithFieldValidation>
+      <WithFeedbackValidation>
+        <ValidationFeedback
+          error=""
+        />
+      </WithFeedbackValidation>
+    </form>
+  </Form>
+</WithFormValidation>
+`;
+
+exports[`withFormValidation Form errors Should be shown if when form is submitted 1`] = `
+<WithFormValidation
+  checkErrors={[Function]}
+  onFieldDeregister={null}
+  onSubmit={[Function]}
+  onValidationChange={null}
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <WithFeedbackValidation>
+        <ValidationFeedback
+          error=""
+        />
+      </WithFeedbackValidation>
+    </form>
+  </Form>
+</WithFormValidation>
+`;
+
+exports[`withFormValidation Form errors Should not be shown if form was not submmited 1`] = `
+<WithFormValidation
+  checkErrors={[Function]}
+  onFieldDeregister={null}
+  onSubmit={[Function]}
+  onValidationChange={null}
+>
+  <Form
+    onSubmit={[Function]}
+  >
+    <form
+      onSubmit={[Function]}
+    >
       <WithFeedbackValidation>
         <ValidationFeedback
           error="There are errors"
@@ -92,6 +138,7 @@ exports[`withFormValidation Errors Global errors Are not shown until a field is 
             className="ValidationFeedback"
             data-component="ValidationFeedback"
           >
+            error
             <BannerAlert
               title="There are errors"
               type="error"
@@ -177,601 +224,6 @@ exports[`withFormValidation Errors Global errors Are not shown until a field is 
           </div>
         </ValidationFeedback>
       </WithFeedbackValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Global errors Should show global form errors 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={Array []}
-        value="1"
-      >
-        <Field
-          error={false}
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="1"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="1"
-          />
-        </Field>
-      </WithFieldValidation>
-      <WithFeedbackValidation>
-        <ValidationFeedback
-          error="There are errors"
-        >
-          <div
-            className="ValidationFeedback"
-            data-component="ValidationFeedback"
-          >
-            <BannerAlert
-              title="There are errors"
-              type="error"
-            >
-              <section
-                className="BannerAlert BannerAlert--error"
-              >
-                <pure(Info)
-                  className="BannerAlert__error-icon"
-                  style={
-                    Object {
-                      "fontSize": 18,
-                    }
-                  }
-                >
-                  <Info
-                    className="BannerAlert__error-icon"
-                    style={
-                      Object {
-                        "fontSize": 18,
-                      }
-                    }
-                  >
-                    <WithStyles(SvgIcon)
-                      className="BannerAlert__error-icon"
-                      style={
-                        Object {
-                          "fontSize": 18,
-                        }
-                      }
-                    >
-                      <SvgIcon
-                        className="BannerAlert__error-icon"
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction-4",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled-6",
-                            "colorError": "MuiSvgIcon-colorError-5",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary-2",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary-3",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-7",
-                            "root": "MuiSvgIcon-root-1",
-                          }
-                        }
-                        color="inherit"
-                        component="svg"
-                        fontSize="default"
-                        style={
-                          Object {
-                            "fontSize": 18,
-                          }
-                        }
-                        viewBox="0 0 24 24"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root-1 BannerAlert__error-icon"
-                          focusable="false"
-                          style={
-                            Object {
-                              "fontSize": 18,
-                            }
-                          }
-                          viewBox="0 0 24 24"
-                        >
-                          <g>
-                            <path
-                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-                            />
-                          </g>
-                        </svg>
-                      </SvgIcon>
-                    </WithStyles(SvgIcon)>
-                  </Info>
-                </pure(Info)>
-                 
-                <span>
-                  There are errors
-                </span>
-                 
-              </section>
-            </BannerAlert>
-          </div>
-        </ValidationFeedback>
-      </WithFeedbackValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Integer with minimum value Register field with a valid initial value should not have errors 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "min",
-              "value": 5,
-            },
-          ]
-        }
-        value="10"
-      >
-        <Field
-          error={false}
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="10"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="10"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Integer with minimum value Register field with an invalid initial value should have errors 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "min",
-              "value": 5,
-            },
-          ]
-        }
-        value="2"
-      >
-        <Field
-          FormHelperTextProps={
-            Object {
-              "data-has-error": true,
-            }
-          }
-          error={true}
-          helperText="some translated stuff"
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="2"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="2"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Integer with minimum value Update a field from invalid to valid should recover from the error 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "min",
-              "value": 1,
-            },
-          ]
-        }
-        value="0"
-      >
-        <Field
-          error={false}
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="0"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="0"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Integer with minimum value Update a field from valid to invalid should have errors 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "min",
-              "value": 1,
-            },
-          ]
-        }
-        value="10"
-      >
-        <Field
-          FormHelperTextProps={
-            Object {
-              "data-has-error": true,
-            }
-          }
-          error={true}
-          helperText="some translated stuff"
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="10"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="10"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Required field A required field registered with empty value should be invalid but still do not show the error 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "required",
-            },
-          ]
-        }
-        value=""
-      >
-        <Field
-          error={false}
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value=""
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value=""
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Required field A required registered filled field is valid 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "required",
-            },
-          ]
-        }
-        value="a value"
-      >
-        <Field
-          error={false}
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="a value"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="a value"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Required field Should have errors when cleared 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "required",
-            },
-          ]
-        }
-        value="a value"
-      >
-        <Field
-          FormHelperTextProps={
-            Object {
-              "data-has-error": true,
-            }
-          }
-          error={true}
-          helperText="some translated stuff"
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="a value"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="a value"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Errors Required field Should recover from errors when filled 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "required",
-            },
-          ]
-        }
-        value="a value"
-      >
-        <Field
-          error={false}
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value="a value"
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value="a value"
-          />
-        </Field>
-      </WithFieldValidation>
-    </form>
-  </Form>
-</WithFormValidation>
-`;
-
-exports[`withFormValidation Submit Should show errors 1`] = `
-<WithFormValidation
-  checkErrors={[Function]}
-  onFieldDeregister={null}
-  onSubmit={[Function]}
-  onValidationChange={null}
->
-  <Form
-    onSubmit={[Function]}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <WithFieldValidation
-        id="field"
-        name="field1"
-        onChange={null}
-        t={[Function]}
-        validators={
-          Array [
-            Object {
-              "rule": "required",
-            },
-          ]
-        }
-        value=""
-      >
-        <Field
-          FormHelperTextProps={
-            Object {
-              "data-has-error": true,
-            }
-          }
-          error={true}
-          helperText="some translated stuff"
-          id="field"
-          name="field1"
-          onChange={[Function]}
-          value=""
-        >
-          <input
-            id="field"
-            name="field1"
-            onChange={[Function]}
-            type="text"
-            value=""
-          />
-        </Field>
-      </WithFieldValidation>
     </form>
   </Form>
 </WithFormValidation>

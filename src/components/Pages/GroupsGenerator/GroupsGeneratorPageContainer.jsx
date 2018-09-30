@@ -110,6 +110,7 @@ class GroupsGeneratorPageContainer extends React.Component {
 
   render() {
     const { isPublic, values, quickResult, privateId } = this.state;
+    console.log('values', values);
     return isPublic ? (
       <GroupsGeneratorPage
         values={values}

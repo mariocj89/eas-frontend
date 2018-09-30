@@ -7,16 +7,11 @@ import STYLES from './ValidationFeedback.scss';
 
 const c = classnames.bind(STYLES);
 
-const ValidationFeedback = ({ error }) => {
-  if (!error) {
-    return null;
-  }
-  return (
-    <div className={c('ValidationFeedback')} data-component={'ValidationFeedback'}>
-      <BannerAlert title={error} type={ALERT_TYPES.ERROR} />
-    </div>
-  );
-};
+const ValidationFeedback = ({ error }) => (
+  <div className={c('ValidationFeedback')} data-component={'ValidationFeedback'}>
+    <BannerAlert title={error} type={ALERT_TYPES.ERROR} />
+  </div>
+);
 
 ValidationFeedback.propTypes = {
   error: PropTypes.string,

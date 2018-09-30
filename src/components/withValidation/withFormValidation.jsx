@@ -7,9 +7,7 @@ const withFormValidation = WrappedComponent => {
       super(props);
       this.state = {
         formSubmitted: false, // It's used to bypass changedFields when the form is submitted
-        fieldErrors: {},
-        formError: undefined,
-        changedFields: [],
+        validations: {},
       };
     }
 
@@ -17,23 +15,11 @@ const withFormValidation = WrappedComponent => {
       return {
         registerValidatedField: this.registerValidatedField.bind(this),
         deregisterValidatedField: this.deregisterValidatedField.bind(this),
-        onFieldChange: this.onFieldChange.bind(this),
-        getErrorsToRenderInField: this.getErrorsToRenderInField.bind(this),
         getFormError: this.getFormError.bind(this),
-        updateErrors: this.updateErrors.bind(this),
-        updateFieldChangedState: this.updateFieldChangedState.bind(this),
+        updateFieldValidationState: this.updateFieldValidationState.bind(this),
+        isFormSubmitted: this.isFormSubmitted.bind(this),
       };
     }
-
-    componentDidUpdate = (previousProps, previousState) => {
-      // Check global form errors
-      const formError = this.props.checkErrors();
-      if (previousState.formError !== formError) {
-        this.setState({
-          formError,
-        });
-      }
-    };
 
     onSubmit = e => {
       if (!this.isFormValid()) {
@@ -46,75 +32,39 @@ const withFormValidation = WrappedComponent => {
       }
     };
 
-    // eslint-disable-next-line no-unused-vars
-    onFieldChange = (name, valid) => {
-      // TODO not sure why this is needed, remove if after a while doesn't cause problems
-      // this.updateErrors(name, valid);
-      // this.updateFieldChangedState(name);
-    };
-
-    getErrorsToRenderInField(name) {
-      const { changedFields, fieldErrors, formSubmitted } = this.state;
-      return formSubmitted || changedFields.includes(name) ? fieldErrors[name] : undefined;
-    }
-
     getFormError() {
-      const { changedFields, formSubmitted } = this.state;
-      return formSubmitted || changedFields.length ? this.state.formError : undefined;
+      const { formSubmitted } = this.state;
+      console.log(
+        'formSubmitted ? this.props.checkErrors()',
+        formSubmitted,
+        this.props.checkErrors(),
+      );
+      return formSubmitted ? this.props.checkErrors() : undefined;
     }
 
     isFormValid = () => {
-      const fieldErrors = Object.values(this.state.fieldErrors);
-      const fieldsValid = !fieldErrors.some(Boolean);
-      const formValid = !this.state.formError;
+      const validations = Object.values(this.state.validations);
+      const fieldsValid = validations.every(Boolean);
+      const formValid = !this.props.checkErrors();
       return fieldsValid && formValid;
     };
 
-    registerValidatedField(name, errors, value) {
-      this.updateErrors(name, errors);
-      const isEmptyAtRegister = (Array.isArray(value) && !value.length) || value === '';
-      if (!isEmptyAtRegister) {
-        this.updateFieldChangedState(name);
-      } else if (this.state.changedFields.indexOf(name) !== -1) {
-        // const changedFields = this.state.changedFields.slice();
-        // changedFields.splice(changedFields.indexOf(name), 1);
-        // this.setState({
-        //   changedFields,
-        // });
-      }
+    isFormSubmitted = () => this.state.formSubmitted;
+
+    registerValidatedField(name, valid) {
+      this.updateFieldValidationState(name, valid);
     }
 
-    updateFieldChangedState(name) {
-      if (!this.state.changedFields.includes(name)) {
-        const changedFields = this.state.changedFields.slice();
-        changedFields.push(name);
-        this.setState(() => ({
-          changedFields,
-        }));
-      }
-    }
-
-    updateErrors(name, errors) {
-      const formError = this.props.checkErrors();
+    updateFieldValidationState(name, valid) {
       this.setState(
-        previousState => {
-          let fieldErrors;
-          if (errors) {
-            // Add the error to the state
-            fieldErrors = {
-              ...previousState.fieldErrors,
-              [name]: errors,
-            };
-          } else {
-            // Remove the error from the state
-            const { [name]: value, ...restFieldErrors } = previousState.fieldErrors;
-            fieldErrors = restFieldErrors;
-          }
-          return {
-            formError,
-            fieldErrors,
-          };
-        },
+        previousState => ({
+          validations: {
+            ...previousState.validations,
+            ...{
+              [name]: valid,
+            },
+          },
+        }),
         () => {
           this.triggerValidationChange();
         },
@@ -131,10 +81,10 @@ const withFormValidation = WrappedComponent => {
     deregisterValidatedField(name) {
       this.setState(
         previousState => {
-          const fieldErrors = Object.assign({}, previousState.fieldErrors);
-          delete fieldErrors[name];
+          const validations = Object.assign({}, previousState.validations);
+          delete validations[name];
           return {
-            fieldErrors,
+            validations,
           };
         },
         () => {
@@ -168,11 +118,9 @@ const withFormValidation = WrappedComponent => {
   WithFormValidation.childContextTypes = {
     registerValidatedField: PropTypes.func,
     deregisterValidatedField: PropTypes.func,
-    onFieldChange: PropTypes.func,
-    getErrorsToRenderInField: PropTypes.func,
     getFormError: PropTypes.func,
-    updateErrors: PropTypes.func,
-    updateFieldChangedState: PropTypes.func,
+    updateFieldValidationState: PropTypes.func,
+    isFormSubmitted: PropTypes.func,
   };
 
   return WithFormValidation;

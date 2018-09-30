@@ -1,9 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import PropTypes from 'prop-types';
+import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import withFormValidation from './withFormValidation';
 import withFieldValidation from './withFieldValidation';
-import ValidationFeedback from './ValidationFeedback';
+// import ValidationFeedback from './ValidationFeedback';
+import withFeedbackValidation from './withFeedbackValidation';
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate HoC receive the t function as a prop
@@ -29,6 +31,7 @@ const Field = ({ valid, FormHelperTextProps, helperText, error, ...props }) => <
 
 const FormWithValidation = withFormValidation(Form);
 const FieldwithValidation = withFieldValidation(Field);
+const ValidationFeedback = withFeedbackValidation(() => <div />);
 
 describe('withFormValidation', () => {
   it('should render correctly', () => {
@@ -37,300 +40,110 @@ describe('withFormValidation', () => {
   });
 
   describe('Registering fields', () => {
-    it('empty fields should register as "unchanged"', () => {
-      const wrapper = mount(
-        <FormWithValidation onSubmit={jest.fn()}>
-          <FieldwithValidation name="field1" id="field" />
-        </FormWithValidation>,
-      );
+    it('should register validated fields', () => {
+      const wrapper = mount(<FormWithValidation onSubmit={jest.fn()} />);
       const instance = wrapper.instance();
 
-      expect(instance.state.changedFields).not.toContain('field1');
-    });
+      instance.registerValidatedField('field1', true);
+      instance.registerValidatedField('field2', false);
 
-    it('fields with initial values should register as "changed"', () => {
-      const wrapper = mount(
-        <FormWithValidation onSubmit={jest.fn()}>
-          <FieldwithValidation name="field1" id="field" value="A value" />
-        </FormWithValidation>,
-      );
-      const instance = wrapper.instance();
-
-      expect(instance.state.changedFields).toContain('field1');
-    });
-  });
-
-  describe('onChange', () => {
-    it('should call the parent onChange function on changes', () => {
-      const onChange = jest.fn();
-      const wrapper = mount(
-        <FormWithValidation onSubmit={jest.fn()}>
-          <FieldwithValidation name="field1" id="field" onChange={onChange} />
-        </FormWithValidation>,
-      );
-
-      const fieldDomElement = wrapper.find('#field').last();
-      const event = { target: { name: 'field1', value: 'asd' } };
-      fieldDomElement.simulate('change', event);
       wrapper.update();
 
-      expect(onChange).toHaveBeenCalled();
+      const { state } = instance;
+
+      expect('field1' in state.validations).toBe(true);
+      expect('field2' in state.validations).toBe(true);
+      expect(state.validations.field1).toBe(true);
+      expect(state.validations.field2).toBe(false);
+    });
+
+    it('should deregister validated fields', () => {
+      const wrapper = mount(<FormWithValidation onSubmit={jest.fn()} />);
+      const instance = wrapper.instance();
+
+      instance.registerValidatedField('field1', false);
+      instance.registerValidatedField('field2', true);
+
+      instance.deregisterValidatedField('field2');
+      wrapper.update();
+
+      const { state } = instance;
+
+      expect('field1' in state.validations).toBe(true);
+      expect('field2' in state.validations).toBe(false);
     });
   });
 
-  describe('Errors', () => {
-    describe('Required field', () => {
-      it('A required registered filled field is valid', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="a value"
-              validators={[{ rule: 'required' }]}
-            />
-          </FormWithValidation>,
-        );
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({});
-        expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-        expect(instance.isFormValid()).toBe(true);
-        wrapper.update();
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('A required field registered with empty value should be invalid but still do not show the error', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation name="field1" id="field" validators={[{ rule: 'required' }]} />
-          </FormWithValidation>,
-        );
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'required' } });
-        expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-        expect(instance.isFormValid()).toBe(false);
-        wrapper.update();
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Should have errors when cleared', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="a value"
-              validators={[{ rule: 'required' }]}
-            />
-          </FormWithValidation>,
-        );
-        const fieldDomElement = wrapper.find('#field').last();
-        const event = { target: { name: 'field1', value: '' } };
-        fieldDomElement.simulate('change', event);
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'required' } });
-        expect(instance.getErrorsToRenderInField('field1')).toEqual({ rule: 'required' });
-        expect(instance.isFormValid()).toBe(false);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Should recover from errors when filled', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="a value"
-              validators={[{ rule: 'required' }]}
-            />
-          </FormWithValidation>,
-        );
-        const fieldDomElement = wrapper.find('#field').last();
-        simulateChangeField(fieldDomElement, '');
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'required' } });
-        expect(instance.getErrorsToRenderInField('field1')).toEqual({ rule: 'required' });
-        expect(instance.isFormValid()).toBe(false);
-
-        simulateChangeField(fieldDomElement, 'Im not empty');
-        expect(instance.state.fieldErrors).toEqual({});
-        expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-        expect(instance.isFormValid()).toBe(true);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-    });
-
-    describe('Integer with minimum value', () => {
-      it('Register field with a valid initial value should not have errors', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="10"
-              validators={[{ rule: 'min', value: 5 }]}
-            />
-          </FormWithValidation>,
-        );
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({});
-        expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-        expect(instance.isFormValid()).toBe(true);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Register field with an invalid initial value should have errors', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="2"
-              validators={[{ rule: 'min', value: 5 }]}
-            />
-          </FormWithValidation>,
-        );
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'min', value: 5 } });
-        expect(instance.getErrorsToRenderInField('field1')).toEqual({ rule: 'min', value: 5 });
-        expect(instance.isFormValid()).toBe(false);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Update a field from valid to invalid should have errors', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="10"
-              validators={[{ rule: 'min', value: 1 }]}
-            />
-          </FormWithValidation>,
-        );
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({});
-        expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-        expect(instance.isFormValid()).toBe(true);
-
-        const fieldDomElement = wrapper.find('#field').last();
-        simulateChangeField(fieldDomElement, '0');
-        expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'min', value: 1 } });
-        expect(instance.getErrorsToRenderInField('field1')).toEqual({ rule: 'min', value: 1 });
-        expect(instance.isFormValid()).toBe(false);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Update a field from invalid to valid should recover from the error', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()}>
-            <FieldwithValidation
-              name="field1"
-              id="field"
-              value="0"
-              validators={[{ rule: 'min', value: 1 }]}
-            />
-          </FormWithValidation>,
-        );
-
-        const instance = wrapper.instance();
-        expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'min', value: 1 } });
-
-        const fieldDomElement = wrapper.find('#field').last();
-        simulateChangeField(fieldDomElement, '5');
-        expect(instance.state.fieldErrors).toEqual({});
-        expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-        expect(instance.isFormValid()).toBe(true);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-    });
-    describe('Global errors', () => {
-      it('Should show global form errors', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()} checkErrors={() => 'There are errors'}>
-            <FieldwithValidation name="field1" id="field" value="1" />
-            <ValidationFeedback />
-          </FormWithValidation>,
-        );
-        const instance = wrapper.instance();
-        expect(instance.isFormValid()).toBe(false);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Are not shown if there are not errors', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()} checkErrors={() => undefined}>
-            <FieldwithValidation name="field1" id="field" value="1" />
-            <ValidationFeedback />
-          </FormWithValidation>,
-        );
-        const instance = wrapper.instance();
-        expect(instance.isFormValid()).toBe(true);
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-
-      it('Are not shown until a field is changed', () => {
-        const wrapper = mount(
-          <FormWithValidation onSubmit={jest.fn()} checkErrors={() => 'There are errors'}>
-            <FieldwithValidation name="field1" id="field" value="1" />
-            <ValidationFeedback />
-          </FormWithValidation>,
-        );
-        const instance = wrapper.instance();
-        expect(instance.isFormValid()).toBe(false);
-
-        const fieldDomElement = wrapper.find('#field').last();
-        simulateChangeField(fieldDomElement, 'still invalid');
-        expect(toJson(wrapper)).toMatchSnapshot();
-      });
-    });
-  });
-  describe('Submit', () => {
-    it('Should call the main onSubmit function if the form is valid', () => {
-      const onSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithValidation onSubmit={onSubmitMock} />);
-
-      const instance = wrapper.instance();
-      instance.isFormValid = jest.fn(() => true);
-
-      wrapper.find('form').simulate('submit');
-      expect(onSubmitMock).toHaveBeenCalled();
-    });
-
-    it('Should not call the main onSubmit function if the form is invalid', () => {
-      const onSubmitMock = jest.fn();
-      const wrapper = mount(<FormWithValidation onSubmit={onSubmitMock} />);
-
-      const instance = wrapper.instance();
-      instance.isFormValid = jest.fn(() => false);
-
-      wrapper.find('form').simulate('submit');
-      expect(onSubmitMock).not.toHaveBeenCalled();
-    });
-
-    it('Should show errors', () => {
+  describe('Form errors', () => {
+    it.only('Should not be shown if form was not submmited', () => {
       const wrapper = mount(
-        <FormWithValidation onSubmit={jest.fn()}>
-          <FieldwithValidation name="field1" id="field" validators={[{ rule: 'required' }]} />
+        <FormWithValidation onSubmit={jest.fn()} checkErrors={() => 'There are errors'}>
+          <ValidationFeedback />
         </FormWithValidation>,
       );
-
       const instance = wrapper.instance();
-      expect(instance.state.fieldErrors).toEqual({ field1: { rule: 'required' } });
-      expect(instance.getErrorsToRenderInField('field1')).toBeUndefined();
-      expect(instance.isFormValid()).toBe(false);
-
-      wrapper.find('form').simulate('submit');
-      expect(instance.getErrorsToRenderInField('field1')).toEqual({ rule: 'required' });
-
+      instance.setState({ formSubmitted: true });
       wrapper.update();
       expect(toJson(wrapper)).toMatchSnapshot();
     });
+
+    it('Should be shown if when form is submitted', () => {
+      const wrapper = mount(
+        <FormWithValidation onSubmit={jest.fn()} checkErrors={() => 'There are errors'}>
+          <ValidationFeedback />
+        </FormWithValidation>,
+      );
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
+
+    it('Are not shown if there are not errors', () => {
+      const wrapper = mount(
+        <FormWithValidation onSubmit={jest.fn()} checkErrors={() => undefined}>
+          <FieldwithValidation name="field1" id="field" value="1" />
+          <ValidationFeedback />
+        </FormWithValidation>,
+      );
+      const instance = wrapper.instance();
+      expect(instance.isFormValid()).toBe(true);
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
+
+    it('Are not shown until a field is changed', () => {
+      const wrapper = mount(
+        <FormWithValidation onSubmit={jest.fn()} checkErrors={() => 'There are errors'}>
+          <FieldwithValidation name="field1" id="field" value="1" />
+          <ValidationFeedback />
+        </FormWithValidation>,
+      );
+      const instance = wrapper.instance();
+      expect(instance.isFormValid()).toBe(false);
+
+      const fieldDomElement = wrapper.find('#field').last();
+      simulateChangeField(fieldDomElement, 'still invalid');
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
+  });
+});
+describe('Submit', () => {
+  it('Should call the main onSubmit function if the form is valid', () => {
+    const onSubmitMock = jest.fn();
+    const wrapper = mount(<FormWithValidation onSubmit={onSubmitMock} />);
+
+    const instance = wrapper.instance();
+    instance.isFormValid = jest.fn(() => true);
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmitMock).toHaveBeenCalled();
+  });
+
+  it('Should not call the main onSubmit function if the form is invalid', () => {
+    const onSubmitMock = jest.fn();
+    const wrapper = mount(<FormWithValidation onSubmit={onSubmitMock} />);
+
+    const instance = wrapper.instance();
+    instance.isFormValid = jest.fn(() => false);
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmitMock).not.toHaveBeenCalled();
   });
 });

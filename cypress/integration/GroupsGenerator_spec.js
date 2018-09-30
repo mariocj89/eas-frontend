@@ -94,6 +94,7 @@ describe('Groups Generator Draw Page', () => {
 
     it('Should recover from not enough participants for N groups', function() {
       cy.visit('/groups');
+      cy.getComponent('SubmitDrawButton').click();
       cy.getComponent('ValidationFeedback').should('be.visible');
       cy.getComponent('GroupsGenerator__participants-field-input').type('one, two,');
       cy.getComponent('ValidationFeedback').should('not.exist');

@@ -3,59 +3,41 @@ import { translate } from 'react-i18next';
 
 import PropTypes from 'prop-types';
 
-const getErrors = (value, validators) =>
-  validators.find(validator => {
-    switch (validator.rule) {
-      case 'required':
-        return !String(value).trim();
-      case 'min':
-        return value < parseInt(validator.value, 10);
-      //   case 'oneOf':
-      //     return validators.oneOf.includes(value);
-      //   case 'pattern':
-      //     return new RegExp(validators.pattern).test(String(value));
-      //   case 'validate':
-      //     return validators.validate();
-      default:
-        return true;
-    }
-  });
-
 const withFieldValidation = WrappedComponent => {
   class WithFieldValidation extends Component {
-    componentDidMount() {
-      const errors = getErrors(this.props.value, this.props.validators);
-      this.context.registerValidatedField(this.props.name, errors, this.props.value);
+    constructor(props) {
+      super(props);
+      this.state = {
+        changed: false,
+        error: undefined,
+      };
     }
 
-    // componentDidUpdate(prevProps) {
-    //   if (this.props.name === undefined) {
-    //     console.log('This validated field is missing the "name" prop'); // eslint-disable-line no-console
-    //   }
-    //   if (
-    //     prevProps.value !== this.props.value ||
-    //     this.isValid(this.props.value) !== this.isValid(prevProps.value)
-    //   ) {
-    //     this.getAndUpdateErrors();
-    //   }
-    // }
+    componentDidMount() {
+      const { value, name } = this.props;
+      const errors = this.getErrors(value);
+      const newState = { error: errors };
+      const valid = !errors;
+      const isEmptyAtRegister = (Array.isArray(value) && !value.length) || value === '';
+      if (!isEmptyAtRegister) {
+        newState.changed = true;
+      }
+      this.setState(newState);
+      this.context.registerValidatedField(name, valid);
+    }
+
+    componentDidUpdate(prevProps) {
+      const prevErrors = this.getErrors(prevProps.value);
+      const errors = this.getErrors(this.props.value);
+      if (JSON.stringify(prevErrors) !== JSON.stringify(errors)) {
+        this.setState({ changed: true, error: errors });
+        this.context.updateFieldValidationState(this.props.name, !errors);
+      }
+    }
 
     componentWillUnmount() {
       this.context.deregisterValidatedField(this.props.name);
     }
-
-    onFieldChange = e => {
-      if (this.props.onChange) {
-        this.props.onChange(e);
-      }
-      this.getAndUpdateErrors(e.target.value);
-    };
-
-    getAndUpdateErrors = value => {
-      const errors = getErrors(value, this.props.validators);
-      this.context.updateErrors(this.props.name, errors);
-      this.context.updateFieldChangedState(this.props.name);
-    };
 
     getDefaultErrorMessage = error => {
       const { t } = this.props;
@@ -69,16 +51,29 @@ const withFieldValidation = WrappedComponent => {
       }
     };
 
-    isValid = value => {
-      // console.log('isValid');
-      const error = getErrors(value, this.props.validators);
-      return error === undefined;
+    getErrors = value => {
+      const { validators } = this.props;
+      return validators.find(validator => {
+        switch (validator.rule) {
+          case 'required':
+            return !String(value).trim();
+          case 'min':
+            return isNaN(value) || value < parseInt(validator.value, 10);
+          default:
+            return true;
+        }
+      });
+    };
+
+    getErrorsToShow = () => {
+      const { changed, error } = this.state;
+      const shouldShowError = this.context.isFormSubmitted() || changed;
+      return shouldShowError && error ? error : undefined;
     };
 
     render() {
       const { validators, t, tReady, ...props } = this.props; // eslint-disable-line react/prop-types
-      const error =
-        'valid' in props ? props.valid : this.context.getErrorsToRenderInField(this.props.name);
+      const error = this.getErrorsToShow();
       let message;
       if (error) {
         message = error.message || this.getDefaultErrorMessage(error);
@@ -89,7 +84,6 @@ const withFieldValidation = WrappedComponent => {
           FormHelperTextProps={error && { 'data-has-error': true }}
           error={Boolean(error)}
           helperText={message}
-          onChange={this.onFieldChange}
         />
       );
     }
@@ -122,10 +116,8 @@ const withFieldValidation = WrappedComponent => {
   WithFieldValidation.contextTypes = {
     registerValidatedField: PropTypes.func.isRequired,
     deregisterValidatedField: PropTypes.func.isRequired,
-    onFieldChange: PropTypes.func.isRequired,
-    getErrorsToRenderInField: PropTypes.func.isRequired,
-    updateErrors: PropTypes.func.isRequired,
-    updateFieldChangedState: PropTypes.func.isRequired,
+    updateFieldValidationState: PropTypes.func.isRequired,
+    isFormSubmitted: PropTypes.func.isRequired,
   };
 
   return translate('WithFieldValidation')(WithFieldValidation);

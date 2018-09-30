@@ -108,6 +108,7 @@ describe('Number Draw Page', () => {
       cy.getComponent('RandomNumber__from-field-input')
         .clear()
         .type(12);
+      cy.getComponent('SubmitDrawButton').click();
       cy.getComponent('ValidationFeedback').should('be.visible');
     });
 
@@ -116,6 +117,7 @@ describe('Number Draw Page', () => {
       cy.getComponent('RandomNumber__number-of-results-field-input')
         .clear()
         .type(12);
+      cy.getComponent('SubmitDrawButton').click();
       cy.getComponent('ValidationFeedback').should('be.visible');
       cy.getComponent('RandomNumber__allow-repeated-field-input').check();
       cy.getComponent('ValidationFeedback').should('not.exist');

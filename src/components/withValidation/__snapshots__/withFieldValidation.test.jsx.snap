@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withFieldValidation Errors Should render correctly 1`] = `
+<Field
+  FormHelperTextProps={
+    Object {
+      "data-has-error": true,
+    }
+  }
+  error={true}
+  helperText="There is an error"
+  name="field1"
+  onChange={null}
+  value=""
+/>
+`;
