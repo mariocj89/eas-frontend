@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import values from 'object.values';
 
 const withFormValidation = WrappedComponent => {
   class WithFormValidation extends Component {
@@ -42,7 +43,7 @@ const withFormValidation = WrappedComponent => {
     isFormValid = () => {
       const { checkErrors } = this.props;
       const { validations } = this.state;
-      const validationsValues = Object.values(validations);
+      const validationsValues = values(validations);
       const fieldsValid = validationsValues.every(Boolean);
       const formValid = !checkErrors();
       return fieldsValid && formValid;
