@@ -60,7 +60,7 @@ class Page extends Component {
   }
 
   render() {
-    const { htmlTitle, className, location, children, isMobile } = this.props;
+    const { htmlTitle, className, location, children, showAdvert } = this.props;
     const canonicalLinks = config.isServer
       ? []
       : [
@@ -82,8 +82,7 @@ class Page extends Component {
         />
         <div className={c('Page', className)}>
           {children}
-          {/* TODO This should be `wizardActive` instead */}
-          {!isMobile && <Advert />}
+          {showAdvert && <Advert />}
         </div>
       </Fragment>
     );
@@ -103,7 +102,7 @@ Page.propTypes = {
   location: ReactRouterPropTypes.location.isRequired,
   ogImage: PropTypes.node,
   hostname: PropTypes.string.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  showAdvert: PropTypes.bool,
 };
 
 Page.defaultProps = {
@@ -113,11 +112,11 @@ Page.defaultProps = {
   htmlKeywords: '',
   htmlDescription: '',
   enableHotjar: false,
+  showAdvert: true,
 };
 
 const mapsStateToProps = state => ({
   hostname: state.userRequest.hostname,
-  isMobile: state.userRequest.isMobile,
 });
 
 export default withMixpanel(withRouter(connect(mapsStateToProps)(Page)));

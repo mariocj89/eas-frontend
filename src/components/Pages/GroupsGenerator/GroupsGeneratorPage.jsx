@@ -1,6 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import withFormValidation from '../../withValidation/withFormValidation.jsx';
 import GeneralDetailsSection from '../../CommonSections/GeneralDetailsSection.jsx';
 import WhenToTossSection from '../../CommonSections/WhenToTossSection.jsx';
@@ -22,6 +23,7 @@ const GroupsGeneratorPage = props => {
     handleCheckErrorsInConfiguration,
     onFieldChange,
     handlePublish,
+    isMobile,
     t,
   } = props;
   const steps = [
@@ -70,6 +72,7 @@ const GroupsGeneratorPage = props => {
       pageType="groups_public_draw"
       ogImage={groupsOgImage}
       enableHotjar
+      showAdvert={!isMobile}
     >
       <DrawLayout>
         <DrawHeading title={t('page_title')} subtitle={t('draw_subheading')} />
@@ -78,6 +81,7 @@ const GroupsGeneratorPage = props => {
           onSubmit={handlePublish}
           submitButtonLabel={t('publish_draw')}
           apiError={apiError}
+          isMobile={isMobile}
         />
       </DrawLayout>
     </Page>
@@ -95,6 +99,7 @@ GroupsGeneratorPage.propTypes = {
   onFieldChange: PropTypes.func.isRequired,
   handlePublish: PropTypes.func.isRequired,
   handleCheckErrorsInConfiguration: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
 };
 
@@ -102,4 +107,6 @@ GroupsGeneratorPage.defaultProps = {
   apiError: false,
 };
 
-export default withTranslation('GroupsGenerator')(GroupsGeneratorPage);
+const mapStateToProps = state => ({ isMobile: state.userRequest.isMobile });
+
+export default withTranslation('GroupsGenerator')(connect(mapStateToProps)(GroupsGeneratorPage));

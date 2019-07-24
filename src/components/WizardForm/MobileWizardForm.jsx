@@ -27,6 +27,7 @@ const MobileWizardForm = ({
       steps={numSteps}
       position="static"
       activeStep={activeStep}
+      className={c('MobileWizardForm__stepper')}
       nextButton={
         <Button size="small" onClick={handleNext}>
           {activeStep === numSteps - 1 ? submitButtonLabel : t('next')}

@@ -1,42 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import classnames from 'classnames/bind';
 import TranslateIcon from '@material-ui/icons/Translate';
-import { useSelector } from 'react-redux';
-import STYLES from './TranslationsSwitch.scss';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-const c = classnames.bind(STYLES);
 const localeMap = {
   'en-GB': 'English',
   'es-ES': 'Español',
 };
 
 const TranslationsSwitch = ({ available, onChange, t, i18n }) => {
-  const isMobile = useSelector(state => state.userRequest.isMobile);
+  const [isModalOpen, openModal] = useState(false);
+  function handleOpen() {
+    openModal(true);
+  }
+
+  function handleClose() {
+    openModal(false);
+  }
+
+  function handleChange(event) {
+    handleClose();
+    onChange(event.target.value);
+  }
   return (
-    <span className={c('TranslationsSwitch')}>
-      {isMobile ? (
-        <TranslateIcon titleAccess={t('change_language')} />
-      ) : (
-        <Typography className={c('TranslationsSwitch__label')} variant="body1" component="span">
-          {t('change_language')}
-        </Typography>
-      )}
-      <FormControl>
-        <Select value={i18n.language} onChange={event => onChange(event.target.value)}>
-          {available.map(item => (
-            <MenuItem key={item} value={item}>
-              {localeMap[item]}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </span>
+    <>
+      <Button onClick={handleOpen}>
+        <TranslateIcon fontSize="small" titleAccess={t('change_language')} />
+        &nbsp;
+        {localeMap[i18n.language]}
+      </Button>
+      <Dialog disableBackdropClick disableEscapeKeyDown open={isModalOpen} onClose={handleClose}>
+        <DialogTitle>{t('change_language')}</DialogTitle>
+        <DialogContent>
+          <FormControl>
+            <Select value={i18n.language} onChange={handleChange}>
+              {available.map(item => (
+                <MenuItem key={item} value={item}>
+                  {localeMap[item]}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 TranslationsSwitch.propTypes = {

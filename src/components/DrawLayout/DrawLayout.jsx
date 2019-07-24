@@ -8,7 +8,10 @@ import STYLES from './DrawLayout.scss';
 const c = classNames.bind(STYLES);
 const DrawLayout = ({ sidePanel, children, isMobile }) =>
   isMobile ? (
-    children
+    <>
+      {children}
+      {sidePanel && <div className={c('DrawLayout__side-panel')}>{sidePanel}</div>}
+    </>
   ) : (
     <div className={c('DrawLayout')}>
       <div className={c(`DrawLayout__content`)}>{children}</div>

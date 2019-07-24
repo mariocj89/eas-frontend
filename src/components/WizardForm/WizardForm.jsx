@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { showFooter, hideFooter } from '../../actions/footerActions';
 import DesktopWizardForm from './DesktopWizardForm.jsx';
 import MobileWizardForm from './MobileWizardForm.jsx';
 
@@ -17,18 +15,6 @@ class WizardForm extends Component {
 
     this.stepRefs = props.steps.map(() => React.createRef());
   }
-
-  // Uncomment this when we are ready to track showing the full page wizard
-  // https://github.com/etcaterva/eas-frontend/issues/100
-  // componentDidMount() {
-  //   // eslint-disable-next-line react/destructuring-assignment
-  //   this.props.hideFooter();
-  // }
-
-  // componentWillUnmount() {
-  //   // eslint-disable-next-line react/destructuring-assignment
-  //   this.props.showFooter();
-  // }
 
   onStepSubmit = e => {
     const { requestedStep } = this.state;
@@ -143,23 +129,12 @@ WizardForm.propTypes = {
   submitButtonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  isMobile: PropTypes.bool,
-  showFooter: PropTypes.func.isRequired,
-  hideFooter: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 WizardForm.defaultProps = {
   initialStep: 0,
   apiError: false,
-  isMobile: false,
 };
 
-const mapStateToProps = state => ({ isMobile: state.userRequest.isMobile });
-const mapDispatchToProps = { showFooter, hideFooter };
-
-export default withTranslation('WizardForm')(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(WizardForm),
-);
+export default withTranslation('WizardForm')(WizardForm);
