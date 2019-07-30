@@ -120,8 +120,11 @@
     "title_placeholder": "Christmas raffle"
   },
   "Raffle": {
+    "create_certificated_draw": "Create a raffle publicly",
     "draw_subheading": "Create an online raffle with prizes and share the results.",
     "field_default_title": "Public raffle",
+    "error_form_not_enough_participants": "There are {{numberOfPrizes}} prizes but only {{count}} participant. Add more participants",
+    "error_form_not_enough_participants_plural": "There are {{numberOfPrizes}} prizes but only {{count}} participants. Add more participants",
     "field_help_separate_participants_commas": "Separate participants by commas",
     "field_help_separate_prizes_commas": "Separate prizes by commas",
     "field_label_list_of_participants": "List of participants",
@@ -131,6 +134,7 @@
     "field_label_when_to_toss": "Choose when the to publish the winners",
     "field_placeholder_participants": "Ana, David, ...",
     "field_placeholder_prizes": "Cruise to Bali, ...",
+    "generate_results": "Raffle prizes",
     "html_description": "Create online raffles. Let the luck decide who will be the winner of a prize.",
     "html_keywords": "raffle, lottery, pool, choose winner, prizes",
     "html_title": "Organize raffle",

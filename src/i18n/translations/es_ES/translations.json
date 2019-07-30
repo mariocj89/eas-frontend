@@ -158,7 +158,10 @@
     "winners": "Ganadores del sorteo"
   },
   "Raffle": {
+    "create_certificated_draw": "Crear un sorteo publicamente",
     "draw_subheading": "Crea un sorteo online con premios y comprate el resultado.",
+    "error_form_not_enough_participants": "Hay {{numberOfPrizes}} premios pero sólo {{count}} participante. Añade más participantes",
+    "error_form_not_enough_participants_plural": "Hay {{numberOfPrizes}} premios pero sólo {{count}} participantes. Añade más participantes",
     "field_default_title": "Sorteo público",
     "field_help_separate_participants_commas": "Separa los participantes por comas",
     "field_help_separate_prizes_commas": "Separa los premios por comas",
@@ -169,6 +172,7 @@
     "field_label_when_to_toss": "Elige cúando se generarán los resultados",
     "field_placeholder_participants": "Ana, David, ...",
     "field_placeholder_prizes": "Crucero a Bali, ...",
+    "generate_results": "Sortear premios",
     "html_description": "Organiza sorteos online. Deja que la suerte decida quién sera el ganador de un premio.",
     "html_keywords": "sorteo, lotería, bombo, elegir ganador, premios",
     "html_title": "Organizar sorteo",
