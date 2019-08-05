@@ -149,6 +149,10 @@
     "published_draw_details": "Raffle details",
     "share_draw": "Share this raffle",
     "share_result": "Share this result",
+    "share_result_dialog_body": "If you want to ensure that the raffle was fair you should create it publicly.\nYou will be able to schedule when the results will be made public and share a link with the participants so they can see the results live.",
+    "share_result_dialog_cancel": "Cancel",
+    "share_result_dialog_ok": "Create raffle publicly",
+    "share_result_dialog_title": "Create raffle publicly to share the results",
     "step_label_configure": "Configure the raffle",
     "step_label_general_details": "General details",
     "step_label_when_to_toss": "When will the results be generated?"

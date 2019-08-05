@@ -88,7 +88,7 @@ const RafflePage = ({
           {apiError && <ErrorFeedback error={t('ApiError:api_error')} />}
           <SubmitButton label={t('generate_results')} />
         </ValidatedForm>
-        <div ref={resultsRef}>
+        <div ref={resultsRef} style={{ 'text-align': 'center' }}>
           {loadingResult && <LoadingCoin />}
           {!loadingResult && quickResult && (
             <>

@@ -9,8 +9,8 @@ const c = classNames.bind(STYLES);
 
 const WinnersList = ({ winners }) => (
   <div className={c('WinnersList')}>
-    {winners.value.map(winner => (
-      <WinnerChip key={winner.prize.id} winner={winner} />
+    {winners.value.map((winner, index) => (
+      <WinnerChip key={winner.prize.id} position={index + 1} winner={winner} />
     ))}
   </div>
 );

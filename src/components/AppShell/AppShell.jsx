@@ -6,7 +6,7 @@ import HomePage from '../Pages/HomePage/HomePage.jsx';
 // import AboutPage from '../Pages/AboutPage/AboutPage.jsx';
 import Header from '../Header/Header.jsx';
 import Footer from '../Footer/Footer.jsx';
-// import Typographies from '../Pages/Typographies/Typographies.jsx';
+import Typographies from '../Pages/Typographies/Typographies.jsx';
 import STYLES from './AppShell.scss';
 // import config from '../../config/config';
 
@@ -67,11 +67,11 @@ const AppShell = () => (
       {/* <Route exact path="/facebook_photo" component={FacebookPhotoRafflePageContainer} />
       <Route path="/facebook_photo/:drawId" component={PublishedFacebookPhotoRafflePageContainer} />
       <Route exact path="/letter" component={LetterDrawPageContainer} /> */}
-      {/* <Route exact path="/about" component={AboutPage} />
+      {/* <Route exact path="/about" component={AboutPage} /> */}
 
-      {config.environment === 'local' && (
-        <Route exact path="/typography" component={Typographies} />
-      )} */}
+      {/* {config.environment === 'local' && ( */}
+      <Route exact path="/typography" component={Typographies} />
+      {/* )} */}
       <Route component={NotFoundPage} />
     </Switch>
     <Footer />

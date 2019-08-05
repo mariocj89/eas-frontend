@@ -4,7 +4,7 @@ $winner-chip-border-color: $color-gray;
 $winner-chip-leftside-background-color: $color-primary-light;
 
 .WinnerChip {
-  display: flex;
+  display: inline-flex;
   margin-top: $spacing-xs;
   border-width: $one-pixel-rem;
   border-style: solid;
