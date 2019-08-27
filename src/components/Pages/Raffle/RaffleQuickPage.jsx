@@ -3,8 +3,6 @@ import { withTranslation, Trans } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { RaffleResult } from 'echaloasuerte-js-sdk';
 import withFormValidation from '../../withValidation/withFormValidation.jsx';
-import GeneralDetailsSection from '../../CommonSections/GeneralDetailsSection.jsx';
-import WhenToTossSection from '../../CommonSections/WhenToTossSection.jsx';
 import ErrorFeedback from '../../ErrorFeedback/ErrorFeedback.jsx';
 import SubmitButton from '../../SubmitButton/SubmitButton.jsx';
 
@@ -14,7 +12,7 @@ import MakeCertifiedDrawPanel from '../../MakeCertifiedDrawPanel/MakeCertifiedDr
 import RaffleConfigurationSection from './RaffleConfigurationSection.jsx';
 import DrawLayout from '../../DrawLayout/DrawLayout.jsx';
 import LoadingCoin from '../../LoadingCoin/LoadingCoin.jsx';
-import WinnersList from '../../WinnersList/WinnersList.jsx';
+import WinnersList from './WinnersList.jsx';
 import ShareDrawModal from '../../ShareDrawModal/ShareDrawModal.jsx';
 import LearnMoreSection from '../../LearnMoreSection/LearnMoreSection.jsx';
 // import groupsOgImage from './groups_og_image.png';

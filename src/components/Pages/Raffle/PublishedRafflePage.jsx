@@ -9,7 +9,7 @@ import { frontloadConnect } from 'react-frontload';
 import { connect } from 'react-redux';
 import { fetchRaffleDraw } from '../../../actions/drawActions';
 import Page from '../../Page/Page.jsx';
-import WinnersList from '../../WinnersList/WinnersList.jsx';
+import WinnersList from './WinnersList.jsx';
 import ResultsBox from '../../ResultsBox/ResultsBox.jsx';
 import Countdown from '../../Countdown/Countdown.jsx';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.jsx';
