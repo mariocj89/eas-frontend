@@ -15,7 +15,7 @@ import LoadingCoin from '../../LoadingCoin/LoadingCoin.jsx';
 import WinnersList from './WinnersList.jsx';
 import ShareDrawModal from '../../ShareDrawModal/ShareDrawModal.jsx';
 import LearnMoreSection from '../../LearnMoreSection/LearnMoreSection.jsx';
-// import groupsOgImage from './groups_og_image.png';
+import raffleOgImage from './raffle_og_image.png';
 
 const analyticsDrawType = 'Raffle';
 const ValidatedForm = withFormValidation(props => <form {...props} />);
@@ -49,7 +49,7 @@ const RafflePage = ({
       htmlTitle={t('html_title')}
       htmlDescription={t('html_description')}
       htmlKeywords={t('html_keywords')}
-      // ogImage={groupsOgImage}
+      ogImage={raffleOgImage}
       pageType="Raffle Quick"
     >
       <DrawLayout

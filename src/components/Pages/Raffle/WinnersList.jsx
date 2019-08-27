@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
 import Typography from '@material-ui/core/Typography';
+import getOrdinal from '../../../i18n/ordinals';
 
 import STYLES from './WinnersList.scss';
 
@@ -12,7 +14,7 @@ const WinnersList = ({ winners }) => (
     {winners.value.map((winner, index) => (
       <div key={winner.prize.id}>
         <Typography variant="h5" display="inline">
-          {index + 1}er Premio (
+          {getOrdinal(index + 1)} Premio (
         </Typography>
         <Typography variant="h2" display="inline">
           {winner.prize.name}
@@ -29,4 +31,4 @@ WinnersList.propTypes = {
   winners: PropTypes.arrayOf(Object).isRequired,
 };
 
-export default WinnersList;
+export default withTranslation('Raffle')(WinnersList);
