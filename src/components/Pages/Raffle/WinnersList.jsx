@@ -12,7 +12,7 @@ const c = classNames.bind(STYLES);
 const WinnersList = ({ winners }) => (
   <div className={c('WinnersList')}>
     {winners.value.map((winner, index) => (
-      <div key={winner.prize.id}>
+      <div key={winner.prize.id} data-testid="WinnersList__result">
         <Typography variant="h5" display="inline">
           {getOrdinal(index + 1)} Premio (
         </Typography>

@@ -6,7 +6,7 @@ describe('Groups Generator Page', () => {
         cy.mockFixture('GroupsGenerator');
         cy.viewport(device);
       });
-
+      // TODO need to write tests for the public draw
       describe('Creation Page', () => {
         it('Should show feedback if there are server errors', () => {
           cy.visit('/groups');
@@ -122,6 +122,7 @@ describe('Groups Generator Page', () => {
         describe('Invalid configurations', () => {
           it('Should show error when any required field is empty', () => {
             cy.visit('/groups');
+            // TODO this way of checking errors is outdated. follow the way it's done in the Raffle
             cy.getComponent('GroupsGenerator__participants-field').within(() => {
               cy.getComponent('GroupsGenerator__participants-field-input').type('one,');
               cy.getError().should('not.exist');
@@ -129,7 +130,7 @@ describe('Groups Generator Page', () => {
               cy.getComponent('GroupsGenerator__participants-field-input').clear();
               cy.getError().should('be.visible');
 
-              // It should recover from not enough
+              // It should recover from "not empty"
               cy.getComponent('GroupsGenerator__participants-field-input').type('one,');
               cy.getError().should('not.exist');
             });

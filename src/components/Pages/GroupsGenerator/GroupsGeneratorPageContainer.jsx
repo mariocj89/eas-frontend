@@ -22,7 +22,7 @@ class GroupsGeneratorPageContainer extends React.Component {
       quickResult: null,
       APIError: false,
       values: {
-        title: 'Sorteo de grupos aleatorios',
+        title: 'Sorteo de grupos aleatorios', // TODO this string should be translated
         description: '',
         participants: [],
         numberOfGroups: '2',

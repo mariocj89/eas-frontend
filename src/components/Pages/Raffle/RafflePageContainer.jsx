@@ -44,11 +44,11 @@ class RafflePageContainer extends Component {
       },
     }));
 
-    this.setState(
-      JSON.parse(
-        '{"APIError":false,"loadingResult":false,"quickResult":{"created_at":"2019-07-31T05:58:19.499Z","schedule_date":null,"value":[{"participant":{"name":"Maria","id":"2de3bfd8-c30f-4ed0-b32e-fd46217c5375","facebook_id":null},"prize":{"name":"Ps4","id":"7b0b86f3-d89b-4768-9b43-fe69ba2a87ce","url":null}},{"participant":{"name":"David","id":"cb40ad68-b30b-4d45-930f-acae5ba83b3e","facebook_id":null},"prize":{"name":"Nintendo Switch","id":"dfb06991-36fb-4fe1-b8fb-ae233a4edae4","url":null}}]},"privateId":"acebd278-0c94-4dc8-baf5-89b7551e251a","values":{"title":"Public raffle","description":"","participants":["David","Pepito","Maria","Pedro"],"prizes":["Ps4","Nintendo Switch"],"dateScheduled":"2019-07-31T06:41:14.427Z"}}',
-      ),
-    );
+    // this.setState(
+    //   JSON.parse(
+    //     '{"APIError":false,"loadingResult":false,"quickResult":{"created_at":"2019-07-31T05:58:19.499Z","schedule_date":null,"value":[{"participant":{"name":"Maria","id":"2de3bfd8-c30f-4ed0-b32e-fd46217c5375","facebook_id":null},"prize":{"name":"Ps4","id":"7b0b86f3-d89b-4768-9b43-fe69ba2a87ce","url":null}},{"participant":{"name":"David","id":"cb40ad68-b30b-4d45-930f-acae5ba83b3e","facebook_id":null},"prize":{"name":"Nintendo Switch","id":"dfb06991-36fb-4fe1-b8fb-ae233a4edae4","url":null}}]},"privateId":"acebd278-0c94-4dc8-baf5-89b7551e251a","values":{"title":"Public raffle","description":"","participants":["David","Pepito","Maria","Pedro"],"prizes":["Ps4","Nintendo Switch"],"dateScheduled":"2019-07-31T06:41:14.427Z"}}',
+    //   ),
+    // );
   }
 
   onFieldChange = (fieldName, value) => {
@@ -66,12 +66,14 @@ class RafflePageContainer extends Component {
 
   createDraw = () => {
     const { values } = this.state;
+    const { match } = this.props;
+    const { isPublic } = match.params;
     const { title, description, participants, prizes } = values;
     const drawData = {
       prizes: prizes.map(prize => ({ name: prize })),
       participants: participants.map(participant => ({ name: participant })),
-      title: title || null,
-      description: description || null,
+      title: isPublic && title ? title : null,
+      description: isPublic && description ? description : null,
     };
     const raffleDraw = Raffle.constructFromObject(drawData);
     return raffleApi.raffleCreate(raffleDraw);

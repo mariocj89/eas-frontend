@@ -19,8 +19,7 @@ import STYLES from './SocialShareButton.scss';
 
 const c = classnames.bind(STYLES);
 
-const SocialButton = ({ url, socialType, size, className, beforeOnClick }) => {
-  const buttonProps = { url, className, beforeOnClick };
+const SocialButton = ({ socialType, size, ...buttonProps }) => {
   switch (socialType) {
     case 'whatsapp':
       return (
@@ -81,6 +80,7 @@ const SocialShareButton = ({ url, drawType, socialType, track }) => (
     url={url}
     socialType={socialType}
     className={c('SocialShareButton')}
+    additionalProps={{ 'data-testid': `SocialButton__${socialType}` }}
   />
 );
 

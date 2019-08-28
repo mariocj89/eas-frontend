@@ -26,7 +26,6 @@ const RaffleConfigurationSection = ({ values, onFieldChange, t }) => (
       inputProps={{ 'data-testid': 'Raffle__participants-field-input' }}
       helperText={t('field_help_separate_participants_commas')}
     />
-    <ValidationFeedback />
     <ValidatedMultiValueInput
       name="prizes"
       label={t('field_label_prizes')}
@@ -41,6 +40,7 @@ const RaffleConfigurationSection = ({ values, onFieldChange, t }) => (
       validators={[{ rule: 'required' }]}
       helperText={t('field_help_separate_prizes_commas')}
     />
+    <ValidationFeedback />
   </SectionPanel>
 );
 
