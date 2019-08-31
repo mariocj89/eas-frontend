@@ -12,6 +12,7 @@ import Page from '../../Page/Page.jsx';
 import WinnersList from './WinnersList.jsx';
 import ResultsBox from '../../ResultsBox/ResultsBox.jsx';
 import Countdown from '../../Countdown/Countdown.jsx';
+import DrawHeading from '../../DrawHeading/DrawHeading.jsx';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.jsx';
 import ShareButtons from '../../ShareButtons/ShareButtons.jsx';
 import DrawLayout from '../../DrawLayout/DrawLayout.jsx';
@@ -30,6 +31,10 @@ const PublishedRafflePage = props => {
   if (isLoading) {
     return <LoadingSpinner fullpage />;
   }
+
+  const ShareButtonsList = () => (
+    <ShareButtons drawType={analyticsDrawType} sectionTitle={t('share_result')} url={shareUrl} />
+  );
   return (
     <Page
       ogImage={raffleOgImage}
@@ -41,29 +46,19 @@ const PublishedRafflePage = props => {
       className={c('PublishedRafflePage')}
     >
       <DrawLayout>
-        <Typography align="center" variant="h1" data-testid="PublishedRafflePage__Title">
-          {title || t('page_title')}
-        </Typography>
-        {description && <Typography variant="body2">{description}</Typography>}
+        <DrawHeading title={title || t('page_title')} subtitle={description} />
         {result.value ? (
-          <ResultsBox title={t('winners')}>
-            <WinnersList winners={result} />
-            <br />
-            <ShareButtons
-              drawType={analyticsDrawType}
-              sectionTitle={t('share_result')}
-              url={shareUrl}
-            />
-          </ResultsBox>
+          <>
+            <ResultsBox title={t('winners')}>
+              <WinnersList winners={result} />
+            </ResultsBox>
+            <ShareButtonsList />
+          </>
         ) : (
-          <Fragment>
+          <>
             <Countdown date={result.schedule_date} />
-            <ShareButtons
-              drawType={analyticsDrawType}
-              sectionTitle={t('share_draw')}
-              url={shareUrl}
-            />
-          </Fragment>
+            <ShareButtonsList />
+          </>
         )}
         <PublishedDrawDetails sectionTitle={t('published_draw_details')}>
           <Typography component="div" variant="body2">

@@ -28,7 +28,7 @@ TrumpetIcon.defaultProps = {
 };
 
 const WinnersTitle = ({ winnersLabel }) => (
-  <Grid container direction="row" justify="center">
+  <Grid container direction="row" justify="center" className={c('ResultsBox__title')}>
     <Grid item>
       <TrumpetIcon inverted />
     </Grid>
@@ -49,9 +49,7 @@ WinnersTitle.propTypes = {
 
 const ResultsBox = ({ title, children }) => (
   <section className={c('ResultsBox__results-panel')}>
-    <div>
-      <WinnersTitle winnersLabel={title} />
-    </div>
+    <WinnersTitle winnersLabel={title} />
     {children}
   </section>
 );
