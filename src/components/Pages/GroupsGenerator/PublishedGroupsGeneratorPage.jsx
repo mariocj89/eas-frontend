@@ -33,7 +33,7 @@ const PublishedGroupsGeneratorPage = props => {
   const shareUrl = hostname + match.url;
 
   // eslint-disable-next-line consistent-return
-  useEffect(() => {
+  useEffect((props) => {
     if (result && !result.value) {
       // Fetch the results once the countdown is over
       const missingSeconds = new Date(result.schedule_date).getTime() - new Date().getTime();
