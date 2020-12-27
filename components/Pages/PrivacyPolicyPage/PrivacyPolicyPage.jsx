@@ -86,7 +86,7 @@ const PrivacyPolicyPage = ({ t, i18n }) => (
           incluir, entre otras, la siguiente:
         </p>
         <ul>
-          <li>Dirección de e-mail</li> <li>Nombre y apellidos</li> <li>Cookies y datos de uso</li>
+          <li>Nombre y apellidos</li> <li>Cookies y datos de uso</li>
         </ul>
         <h4>Datos de uso</h4>
         <p>
@@ -133,7 +133,6 @@ const PrivacyPolicyPage = ({ t, i18n }) => (
         <p>EchaloASuerte utiliza los datos recopilados con diversas finalidades:</p>
         <ul>
           <li>Suministrar y mantener nuestro Servicio</li>
-          <li>Notificarle cambios en nuestro Servicio</li>
           <li>
             Permitirle participar en funciones interactivas de nuestro Servicio cuando decida
             hacerlo
@@ -314,7 +313,7 @@ const PrivacyPolicyPage = ({ t, i18n }) => (
         <h2>Contacte con nosotros</h2>
         <p>Si tiene alguna pregunta sobre esta Política de privacidad, contacte con nosotros: </p>
         <ul>
-          <li>Por e-mail: info@echaloasuerte.com</li>
+          <li>Por e-mail: echaloasuerte@gmail.com</li>
         </ul>{' '}
       </div>
     ) : (
@@ -360,7 +359,6 @@ const PrivacyPolicyPage = ({ t, i18n }) => (
         </p>
 
         <ul>
-          <li>Email address</li>
           <li>First name and last name</li>
           <li>Cookies and Usage Data</li>
         </ul>
@@ -410,7 +408,6 @@ const PrivacyPolicyPage = ({ t, i18n }) => (
         <p>EchaloASuerte uses the collected data for various purposes:</p>
         <ul>
           <li>To provide and maintain the Service</li>
-          <li>To notify you about changes to our Service</li>
           <li>
             To allow you to participate in interactive features of our Service when you choose to do
             so
@@ -592,7 +589,7 @@ const PrivacyPolicyPage = ({ t, i18n }) => (
         <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, please contact us:</p>
         <ul>
-          <li>By email: info@echaloasuerte.com</li>
+          <li>By email: echaloasuerte@gmail.com</li>
         </ul>
       </div>
     )}
